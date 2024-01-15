@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Course } from '../models/courses';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,12 +9,9 @@ import { HttpClient } from '@angular/common/http';
 export class CoursesService {
   constructor(private httpClient: HttpClient) {}
 
-  list(): Course[] {
-    return [
-      { _id: '1', name: 'Curso de NestJS', category: 'backend' },
-      { _id: '2', name: 'Curso de Springboot', category: 'backend' },
-      { _id: '3', name: 'Curso de React', category: 'frontend' },
-      { _id: '4', name: 'Curso de Angular', category: 'frontend' },
-    ];
+  private readonly API = 'http://localhost:8080/v1/courses'
+
+  list(): Observable<Course[]> {
+    return this.httpClient.get<Course[]>(this.API);
   }
 }

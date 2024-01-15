@@ -5,6 +5,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Course } from '../models/courses';
 import { CoursesService } from '../services/courses.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-courses',
@@ -16,6 +17,6 @@ import { CoursesService } from '../services/courses.service';
 export class CoursesComponent {
   constructor(private coursesService: CoursesService) {}
 
-  courses: Course[] = this.coursesService.list();
+  courses: Observable<Course[]> = this.coursesService.list();
   displayedColumns = ['name', 'category'];
 }
