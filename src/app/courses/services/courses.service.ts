@@ -7,9 +7,9 @@ import { Course } from '../models/courses';
   providedIn: 'root',
 })
 export class CoursesService {
-  constructor(private httpClient: HttpClient) {}
+  private readonly API = 'http://localhost:8080/v1/courses2';
 
-  private readonly API = 'http://localhost:8080/v1/courses';
+  constructor(private httpClient: HttpClient) {}
 
   list(): Observable<Course[]> {
     return this.httpClient.get<Course[]>(this.API).pipe(first(), delay(1000));
