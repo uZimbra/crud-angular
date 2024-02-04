@@ -7,7 +7,7 @@ import { Course } from '../models/courses';
   providedIn: 'root',
 })
 export class CoursesService {
-  private readonly API = 'http://localhost:8080/v1/courses2';
+  private readonly API = 'http://localhost:8080/v1/courses';
 
   constructor(private httpClient: HttpClient) {}
 
