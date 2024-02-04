@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Course } from '../models/courses';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, delay, first } from 'rxjs';
+import { Course } from '../models/courses';
 
 @Injectable({
   providedIn: 'root',
@@ -9,9 +9,9 @@ import { Observable } from 'rxjs';
 export class CoursesService {
   constructor(private httpClient: HttpClient) {}
 
-  private readonly API = 'http://localhost:8080/v1/courses'
+  private readonly API = 'http://localhost:8080/v1/courses';
 
   list(): Observable<Course[]> {
-    return this.httpClient.get<Course[]>(this.API);
+    return this.httpClient.get<Course[]>(this.API).pipe(first(), delay(1000));
   }
 }

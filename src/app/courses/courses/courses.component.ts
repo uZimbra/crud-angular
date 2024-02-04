@@ -1,22 +1,21 @@
 import { Component } from '@angular/core';
 
-import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
+import { AppMaterialModule } from '../../shared/app-material.module';
 import { Course } from '../models/courses';
 import { CoursesService } from '../services/courses.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [MatTableModule, MatCardModule, MatToolbarModule],
+  imports: [CommonModule, AppMaterialModule],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.scss',
 })
 export class CoursesComponent {
-  constructor(private coursesService: CoursesService) {}
-
-  courses: Observable<Course[]> = this.coursesService.list();
+  courses$: Observable<Course[]> = this.coursesService.list();
   displayedColumns = ['name', 'category'];
+
+  constructor(private coursesService: CoursesService) {}
 }
