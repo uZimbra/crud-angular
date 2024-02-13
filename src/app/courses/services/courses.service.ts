@@ -7,11 +7,16 @@ import { Course } from '../models/courses';
   providedIn: 'root',
 })
 export class CoursesService {
-  private readonly API = 'http://localhost:8080/v1/courses';
+  private readonly API = 'http://localhost:8080/v1/course';
 
   constructor(private httpClient: HttpClient) {}
 
-  list(): Observable<Course[]> {
+  public list(): Observable<Course[]> {
     return this.httpClient.get<Course[]>(this.API).pipe(first(), delay(1000));
+  }
+
+  public save(course: Course): Observable<Course> {
+    console.log('salvou?', course);
+    return this.httpClient.post<Course>(this.API, course).pipe(first());
   }
 }
